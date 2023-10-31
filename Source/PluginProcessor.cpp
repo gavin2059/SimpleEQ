@@ -108,6 +108,7 @@ void SimpleEQAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
                                                                                 chainSettings.peakFreq,
                                                                                 chainSettings.peakQuality,
                                                                                 juce::Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
+    // Process current GUI parameters through the chains
     *leftChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
     *rightChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
 }
@@ -156,18 +157,23 @@ void SimpleEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
+    
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+    // Always fetch newest parameters before making changes to the audio
     auto chainSettings = getChainSettings(apvts);
     auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(
                                                                                 getSampleRate(),
                                                                                 chainSettings.peakFreq,
                                                                                 chainSettings.peakQuality,
                                                                                 juce::Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
+    
+    // Get changes from the GUI (e.g. slider controls)
     *leftChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
     *rightChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
 
+    // Process GUI changes in context
     juce::dsp::AudioBlock<float> block(buffer);
     auto leftBlock = block.getSingleChannelBlock(0);
     auto rightBlock = block.getSingleChannelBlock(1);
