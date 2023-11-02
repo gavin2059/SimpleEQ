@@ -278,27 +278,27 @@ juce::AudioProcessorValueTreeState::ParameterLayout
 {
      juce::AudioProcessorValueTreeState::ParameterLayout layout;
      layout.add(std::make_unique<juce::AudioParameterFloat>(
-        "LowCut Freq", "LowCut Freq", 
+        juce::ParameterID {"LowCut Freq", 1}, "LowCut Freq",
         juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f),
         20.f
      ));
      layout.add(std::make_unique<juce::AudioParameterFloat>(
-        "HighCut Freq", "HighCut Freq", 
+        juce::ParameterID {"HighCut Freq", 1}, "HighCut Freq",
         juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f),
         20000.f
      ));
      layout.add(std::make_unique<juce::AudioParameterFloat>(
-        "Peak Freq", "Peak Freq", 
+        juce::ParameterID {"Peak Freq", 1}, "Peak Freq",
         juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f),
         750.f
      ));
      layout.add(std::make_unique<juce::AudioParameterFloat>(
-        "Peak Gain", "Peak Gain", 
+        juce::ParameterID {"Peak Gain", 1}, "Peak Gain",
         juce::NormalisableRange<float>(-24.f, 24.f, 0.5f, 1.f),
         0.0f
      ));
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        "Peak Quality", "Peak Quality", 
+        juce::ParameterID {"Peak Quality", 1}, "Peak Quality",
         juce::NormalisableRange<float>(0.1, 10, 0.05f, 1.f),
         1.f
      ));
@@ -309,8 +309,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout
         str << (12 + i*12) << " db/Oct";
         stringArray.add(str);
     }
-    layout.add(std::make_unique<juce::AudioParameterChoice>("LowCut Slope", "LowCut Slope", stringArray, 0 ));
-    layout.add(std::make_unique<juce::AudioParameterChoice>("HighCut Slope", "HighCut Slope", stringArray, 0 ));
+        layout.add(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID {"LowCut Slope", 1}, "LowCut Slope", stringArray, 0 ));
+        layout.add(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID {"HighCut Slope", 1}, "HighCut Slope", stringArray, 0 ));
 
      return layout;
 }
