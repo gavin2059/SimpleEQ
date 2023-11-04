@@ -16,7 +16,7 @@ peakFreqSliderAttachment(audioProcessor.apvts, "Peak Freq", peakFreqSlider),
 peakGainSliderAttachment(audioProcessor.apvts, "Peak Gain", peakGainSlider),
 peakQualitySliderAttachment(audioProcessor.apvts, "Peak Quality", peakQualitySlider),
 lowCutFreqSliderAttachment(audioProcessor.apvts, "LowCut Freq", lowCutFreqSlider),
-highCutFreqSliderAttachment(audioProcessor.apvts, "HIghCut Freq", highCutFreqSlider),
+highCutFreqSliderAttachment(audioProcessor.apvts, "HighCut Freq", highCutFreqSlider),
 lowCutSlopeSliderAttachment(audioProcessor.apvts, "LowCut Slope", lowCutSlopeSlider),
 highCutSlopeSliderAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlopeSlider)
 {
@@ -26,11 +26,25 @@ highCutSlopeSliderAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope
     {
         addAndMakeVisible(comp);
     }
+    
+    const auto& params = audioProcessor.getParameters();
+    for(auto param: params)
+    {
+        param->addListener(this);
+    }
+    
+    startTimerHz(60);
+    
     setSize (600, 400);
 }
 
 SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor()
 {
+    const auto& params = audioProcessor.getParameters();
+    for(auto param: params)
+    {
+        param->removeListener(this);
+    }
 }
 
 //==============================================================================
@@ -141,9 +155,16 @@ void SimpleEQAudioProcessorEditor::timerCallback()
     if(parametersChanged.compareAndSetBool(false, true))
     {
         // update the monochain
+        auto chainSettings = getChainSettings(audioProcessor.apvts);
+        auto peakCoefficients = makePeakFilter(chainSettings, audioProcessor.getSampleRate());
+        updateCoefficients(monoChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
+
         // signal a repaint
+        repaint();
     }
 }
+
+
 
 std::vector<juce::Component*> SimpleEQAudioProcessorEditor::getComps()
 {
