@@ -42,7 +42,12 @@ void RotarySliderWithLabels::paint(juce::Graphics &g)
     auto endAng = degreesToRadians(360.f + 180.f - 45.f);
     auto range = getRange();
     auto sliderBounds = getSliderBounds();
-    getLookAndFeel().drawRotarySlider(g, 
+    
+    g.setColour(Colours::red);
+    g.drawRect(getLocalBounds());
+    g.setColour(Colours::yellow);
+    g.drawRect(sliderBounds);
+    getLookAndFeel().drawRotarySlider(g,
                                       sliderBounds.getX(),
                                       sliderBounds.getY(),
                                       sliderBounds.getWidth(),
