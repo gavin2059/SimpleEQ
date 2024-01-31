@@ -4,6 +4,15 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="odiohl" name="SimpleEQ">
     <GROUP id="{DF0B022B-2423-97E2-032C-3481E1F1FAA4}" name="Source">
+      <GROUP id="{7A51D361-E357-6426-6B9C-8F681C6E692F}" name="Processors">
+        <FILE id="sfV9ue" name="ChainSettings.cpp" compile="1" resource="0"
+              file="Source/Processors/ChainSettings.cpp"/>
+        <FILE id="ychLuT" name="ChainSettings.h" compile="0" resource="0" file="Source/Processors/ChainSettings.h"/>
+        <FILE id="RwmJYJ" name="Fifo.cpp" compile="1" resource="0" file="Source/Processors/Fifo.cpp"/>
+        <FILE id="BIJ6iN" name="Fifo.h" compile="0" resource="0" file="Source/Processors/Fifo.h"/>
+        <FILE id="gVR8JA" name="Filters.cpp" compile="1" resource="0" file="Source/Processors/Filters.cpp"/>
+        <FILE id="pOWW3z" name="Filters.h" compile="0" resource="0" file="Source/Processors/Filters.h"/>
+      </GROUP>
       <GROUP id="{684CCCFE-1E2B-5532-91B1-A75DE3C746B4}" name="Components">
         <FILE id="XoWfgO" name="ResponseCurveComponent.cpp" compile="1" resource="0"
               file="Source/Components/ResponseCurveComponent.cpp"/>

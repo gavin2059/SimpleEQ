@@ -22,7 +22,7 @@ lowCutFreqSlider(*audioProcessor.apvts.getParameter("LowCut Freq"), "Hz"),
 highCutFreqSlider(*audioProcessor.apvts.getParameter("HighCut Freq"), "Hz"),
 lowCutSlopeSlider(*audioProcessor.apvts.getParameter("LowCut Slope"), "dB/Oct"),
 highCutSlopeSlider(*audioProcessor.apvts.getParameter("HighCut Slope"), "dB/Oct"),
-responseCurveComponentPtr(new ResponseCurveComponent(audioProcessor)),
+responseCurveComponentPtr(std::make_unique<ResponseCurveComponent>(audioProcessor)),
 peakFreqSliderAttachment(audioProcessor.apvts, "Peak Freq", peakFreqSlider),
 peakGainSliderAttachment(audioProcessor.apvts, "Peak Gain", peakGainSlider),
 peakQualitySliderAttachment(audioProcessor.apvts, "Peak Quality", peakQualitySlider),
@@ -77,6 +77,7 @@ void SimpleEQAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     
+    // Carve up plugin bounds and assign to different components
     auto bounds = getLocalBounds();
     // JUCE_LIVE_CONSTANT lets you adjust while display is active
 //    float hRatio = JUCE_LIVE_CONSTANT(33) / 100.f;
