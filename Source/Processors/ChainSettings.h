@@ -25,6 +25,10 @@ struct ChainSettings
     bool lowCutBypassed { false }, peakBypassed { false }, highCutBypassed { false };
 };
 
+/**
+     @param apvts The reference to the APVTS to get chain settings for
+     @return The chain settings of the given APVTS
+ */
 ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
 
 using Filter = juce::dsp::IIR::Filter<float>;

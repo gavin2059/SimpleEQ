@@ -13,8 +13,18 @@
 #include <JuceHeader.h>
 
 using Coefficients = Filter::CoefficientsPtr;
+
+/**
+    @param old Reference to the old coefficients to replace
+    @param replacements Reference to the new coefficients
+ */
 void updateCoefficients(Coefficients& old, const Coefficients& replacements);
 
+/**
+    @brief Updates a chain with new coefficients
+    @param chain The chain to update
+    @param coefficients The coefficients to use
+ */
 template<int Index, typename ChainType, typename CoefficientType>
 void update(ChainType& chain, const CoefficientType& coefficients)
 {
@@ -22,6 +32,12 @@ void update(ChainType& chain, const CoefficientType& coefficients)
     chain.template setBypassed<Index>(false);
 }
 
+/**
+    @brief updates a cut filter
+    @param leftLowCut reference to the cut filter chain to update
+    @param cutCoefficients reference to the coefficients to use
+    @param lowCutSlope reference to slope to use
+ */
 template<typename ChainType, typename CoefficientType>
 void updateCutFilter(ChainType& leftLowCut, const CoefficientType& cutCoefficients, const Slope& lowCutSlope)
 {
@@ -44,6 +60,9 @@ void updateCutFilter(ChainType& leftLowCut, const CoefficientType& cutCoefficien
     }
 }
 
+/**
+    @return low cut filter
+ */
 inline auto makeLowCutFilter(const ChainSettings& chainSettings, double sampleRate)
 {
    return juce::dsp::FilterDesign<float>::
@@ -53,6 +72,9 @@ inline auto makeLowCutFilter(const ChainSettings& chainSettings, double sampleRa
                                                 (chainSettings.lowCutSlope + 1) * 2);
 }
 
+/**
+    @return high cut filter
+ */
 inline auto makeHighCutFilter(const ChainSettings& chainSettings, double sampleRate)
 {
    return  juce::dsp::FilterDesign<float>::
@@ -62,4 +84,7 @@ inline auto makeHighCutFilter(const ChainSettings& chainSettings, double sampleR
                                                (chainSettings.highCutSlope + 1) * 2);
 }
 
+/**
+    @return peak filter
+ */
 Coefficients makePeakFilter(const ChainSettings& chainSettings, double sampleRate);
