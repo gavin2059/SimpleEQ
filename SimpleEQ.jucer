@@ -4,6 +4,16 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="odiohl" name="SimpleEQ">
     <GROUP id="{DF0B022B-2423-97E2-032C-3481E1F1FAA4}" name="Source">
+      <GROUP id="{684CCCFE-1E2B-5532-91B1-A75DE3C746B4}" name="Components">
+        <FILE id="XoWfgO" name="ResponseCurveComponent.cpp" compile="1" resource="0"
+              file="Source/Components/ResponseCurveComponent.cpp"/>
+        <FILE id="KG3MVx" name="ResponseCurveComponent.h" compile="0" resource="0"
+              file="Source/Components/ResponseCurveComponent.h"/>
+        <FILE id="vZwuap" name="RotarySliderWithLabels.cpp" compile="1" resource="0"
+              file="Source/Components/RotarySliderWithLabels.cpp"/>
+        <FILE id="W2IKrc" name="RotarySliderWithLabels.h" compile="0" resource="0"
+              file="Source/Components/RotarySliderWithLabels.h"/>
+      </GROUP>
       <FILE id="ErbWMg" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="Sny0ZL" name="PluginProcessor.h" compile="0" resource="0"
