@@ -14,6 +14,9 @@
         <FILE id="pOWW3z" name="Filters.h" compile="0" resource="0" file="Source/Processors/Filters.h"/>
       </GROUP>
       <GROUP id="{684CCCFE-1E2B-5532-91B1-A75DE3C746B4}" name="Components">
+        <FILE id="IvdNYd" name="PathProducer.cpp" compile="1" resource="0"
+              file="Source/Components/PathProducer.cpp"/>
+        <FILE id="QiC7gi" name="PathProducer.h" compile="0" resource="0" file="Source/Components/PathProducer.h"/>
         <FILE id="XoWfgO" name="ResponseCurveComponent.cpp" compile="1" resource="0"
               file="Source/Components/ResponseCurveComponent.cpp"/>
         <FILE id="KG3MVx" name="ResponseCurveComponent.h" compile="0" resource="0"
